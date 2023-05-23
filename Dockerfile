@@ -17,6 +17,8 @@ RUN echo \
   "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
   tee /etc/apt/sources.list.d/docker.list > /dev/null
 RUN apt-get update && apt-get install -y --no-install-recommends docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+RUN systemctl enable docker.service --now
+RUN systemctl enable containerd.service --now
 
 # Can't run as root, so create a user and switch to it.
 # Make the user a sudoer.
@@ -36,4 +38,4 @@ RUN curl -o actions-runner-linux-x64-2.304.0.tar.gz -L https://github.com/action
 RUN tar xzf ./actions-runner-linux-x64-2.304.0.tar.gz
 RUN sudo ./bin/installdependencies.sh
 RUN ./config.sh --url https://github.com/${GITHUB_OWNER} --token ${GITHUB_TOKEN} --name ${RAILWAY_GIT_COMMIT_SHA} --replace
-ENTRYPOINT ["./run.sh"]
+CMD ["./run.sh"]
