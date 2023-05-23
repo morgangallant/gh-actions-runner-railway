@@ -21,7 +21,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends docker-ce docke
 # Make the user a sudoer.
 RUN useradd -m actions
 RUN usermod -aG sudo actions
+RUN usermod -aG docker actions
 RUN echo "actions ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+RUN newgrp docker
+RUN chown "actions:actions" /home/actions/.docker -R
+RUN chmod g+rwx "/home/actions/.docker" -R
 USER actions
 WORKDIR /home/actions
 
