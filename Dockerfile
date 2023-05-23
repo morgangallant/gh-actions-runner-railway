@@ -2,6 +2,7 @@
 FROM debian:stable-slim
 
 # Requires the following variables.
+# Get GITHUB_TOKEN AND GITHUB_OWNER FROM Settings -> Runners -> New Runner -> New Self-Hosted -> Linux
 ARG GITHUB_TOKEN
 ARG GITHUB_OWNER
 ARG RAILWAY_GIT_COMMIT_SHA
