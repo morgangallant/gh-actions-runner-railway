@@ -26,9 +26,10 @@ RUN usermod -aG docker actions
 RUN echo "actions ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 RUN newgrp docker
 WORKDIR /home/actions
-RUN chown "actions:actions" /home/actions/.docker -R
-RUN chmod g+rwx "/home/actions/.docker" -R
 USER actions
+RUN mkdir -p /home/actions/.docker
+RUN sudo chown "actions:actions" /home/actions/.docker -R
+RUN sudo chmod g+rwx "/home/actions/.docker" -R
 
 # Download and install the runner.
 RUN curl -o actions-runner-linux-x64-2.304.0.tar.gz -L https://github.com/actions/runner/releases/download/v2.304.0/actions-runner-linux-x64-2.304.0.tar.gz
