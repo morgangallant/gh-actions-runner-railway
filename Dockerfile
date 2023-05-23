@@ -6,7 +6,7 @@ ARG GITHUB_TOKEN
 ARG GITHUB_OWNER
 
 # Dependencies.
-RUN apt-get update && apt-get install -y --no-install-recommends curl ca-certificates tar gzip sudo
+RUN apt-get update && apt-get install -y --no-install-recommends curl ca-certificates tar gzip sudo docker
 
 # Can't run as root, so create a user and switch to it.
 # Make the user a sudoer.
